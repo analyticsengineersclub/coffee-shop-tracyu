@@ -30,7 +30,7 @@ models:
                 - not_null
 
     - name: monthly_customers
-      description: '{{ doc("monthly_customers") }}'
+      description: '{{ doc("readme") }}'
       columns:
           - name: number_of_new_customers
             description: "Count of customers whose first order was in this month"
