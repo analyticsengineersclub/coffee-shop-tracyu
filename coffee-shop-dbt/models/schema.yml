@@ -10,8 +10,6 @@ models:
             tests:
                 - unique
                 - not_null
-                - accepted_values
-                  values: ['foo', 'bar', 'baz']
 
     - name: monthly_customers
       description: "The number of new customers by month"
