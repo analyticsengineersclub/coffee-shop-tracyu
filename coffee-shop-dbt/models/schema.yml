@@ -10,3 +10,9 @@ models:
             tests:
                 - unique
                 - not_null
+
+    - name: monthly_customers
+      description: "The number of new customers by month"
+      columns:
+          - name: number_of_new_customers
+            description: "Count of customers whose first order was in this month"
