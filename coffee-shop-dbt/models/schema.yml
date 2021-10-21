@@ -1,6 +1,24 @@
 
 version: 2
 
+sources:
+  - name: coffee_shop
+    project: analytics-engineers-club
+    tables:
+      - name: customers
+        columns:
+          - name: id
+            tests:
+              - unique
+              - not_null
+
+      - name: orders
+        columns:
+          - name: id
+            tests:
+              - unique
+              - not_null
+
 models:
     - name: customers
       description: "Each customer, how many orders they have placed, and when they placed their first order."
@@ -12,7 +30,7 @@ models:
                 - not_null
 
     - name: monthly_customers
-      description: "The number of new customers by month"
+      description: '{{ doc("monthly_customers") }}'
       columns:
           - name: number_of_new_customers
             description: "Count of customers whose first order was in this month"
