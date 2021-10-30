@@ -1,0 +1,37 @@
+version: 2
+
+models:
+    - name: stg__customers
+      columns:
+          - name: id
+            tests:
+                - unique
+                - not_null
+
+    - name: stg__order_items
+      columns:
+          - name: id
+            tests:
+                - unique
+                - not_null
+
+    - name: stg__orders
+      columns:
+          - name: id
+            tests:
+                - unique
+                - not_null
+
+    - name: stg__product_prices
+      columns:
+          - name: id
+            tests:
+                - unique
+                - not_null
+
+    - name: stg__products
+      columns:
+          - name: id
+            tests:
+                - unique
+                - not_null
