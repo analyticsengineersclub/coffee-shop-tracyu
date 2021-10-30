@@ -1,3 +1,4 @@
+{{ config(materialized='table') }}
 
 with order_detail as (
     select order_items.id as order_items_id
