@@ -20,9 +20,7 @@ with first_visitor_id as (
     , customer_id
     from {{ source('web_tracking', 'pageviews')}}
     where pageviews.customer_id is null 
-)
 
--- move this into a second model
 , pageview_times as (
     select *
     , lag(timestamp) over (partition by visitor_id, device_type order by timestamp asc) as previous_timestamp
