@@ -1,30 +1,13 @@
 {{ config(materialized='table') }}
 
-with visitor_ids as (
-    select customer_id
-    , visitor_id
-    , row_number() over (partition by customer_id order by timestamp asc) as visitor_dup
-    from {{ source('web_tracking', 'pageviews')}}
-    where customer_id is not null
-) 
-
-, first_visitor_ids as (
-    select customer_id
-    , visitor_id as first_visitor_id 
-    from visitor_ids
-    where visitor_dup = 1
-)
-
-, combined as (
+with first_visitor_id as (
     select pageviews.id
-    , first_visitor_id as visitor_id
+    , first_value(visitor_id ignore nulls) over (partition by customer_id order by timestamp asc) as visitor_id
     , pageviews.device_type
     , pageviews.timestamp	
     , pageviews.page
     , pageviews.customer_id
-    from {{ source('web_tracking', 'pageviews')}} pageviews
-    left join first_visitor_ids 
-        on pageviews.customer_id = first_visitor_ids.customer_id
+    from {{ source('web_tracking', 'pageviews')}}
     where pageviews.customer_id is not null 
 
     union distinct
@@ -37,12 +20,11 @@ with visitor_ids as (
     , customer_id
     from {{ source('web_tracking', 'pageviews')}}
     where pageviews.customer_id is null 
-)
 
 , pageview_times as (
     select *
     , lag(timestamp) over (partition by visitor_id, device_type order by timestamp asc) as previous_timestamp
-    from combined
+    from first_visitor_id
     order by visitor_id, device_type, timestamp
     limit 30
 )
@@ -62,5 +44,5 @@ select id
 , timestamp 
 , page
 , customer_id
-, SUM(is_new_session) OVER (ORDER BY visitor_id, timestamp) AS session_id
+, SUM(is_new_session) OVER (ORDER BY visitor_id, device_type timestamp) AS session_id
 from new_sessions 

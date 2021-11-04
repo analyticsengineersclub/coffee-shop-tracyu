@@ -32,5 +32,19 @@ models:
     - name: customer_ltv_by_week
       description: "Weekly revenue and cumulative revenue by week since they were acquired as a customer"
       tests:
-      - unique:
-          column_name: "(customer_id || '-' || week)"
+        - unique:
+            column_name: "(customer_id || '-' || week)"
+      columns:
+        - name: customer_id
+          tests:
+            - not_null
+        - name: week
+          tests:
+            - not_null
+        - name: revenue
+          tests:
+            - not_null  
+        - name: cumulative_revenue
+          tests:
+            - not_null                     
+          
