@@ -59,6 +59,3 @@ models:
             description: "the price of the product at the time it was ordered"
           - name: customer_order_number
             description: "the nth order made by this customer"
-
-    - name: pageview_sesssions
-      description: "Adds a session_id based on visitor_id, device type and 30 min interval"
