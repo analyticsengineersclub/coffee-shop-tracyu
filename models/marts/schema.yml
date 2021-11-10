@@ -48,14 +48,3 @@ models:
           tests:
             - not_null                     
 
-    - name: revenue
-      description: "Same granularity as order_items table, with product price at time of order and customer order number"
-      columns:
-          - name: order_items_id 
-            tests:
-                - unique
-                - not_null
-          - name: product_price_at_time_of_order
-            description: "the price of the product at the time it was ordered"
-          - name: customer_order_number
-            description: "the nth order made by this customer"

@@ -6,7 +6,7 @@ with users_stiched as (
     select id
     , case when customer_id is not null 
             then first_value(visitor_id ignore nulls) over (partition by pageviews.customer_id order by timestamp asc)
-            when pcustomer_id is null then visitor_id
+            when customer_id is null then visitor_id
             else null end as visitor_id
     , device_type
     , timestamp	
@@ -20,7 +20,6 @@ with users_stiched as (
     , lag(timestamp) over (partition by visitor_id, device_type order by timestamp asc) as previous_timestamp
     from users_stiched
     order by visitor_id, device_type, timestamp
-    limit 30
 )
 
 -- determine if this pageview is start of new session

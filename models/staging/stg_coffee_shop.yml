@@ -37,8 +37,14 @@ models:
                 - not_null
 
     - name: stg__pageviews
+      description: "Pageviews with visitor_id stitched and global session_id"
       columns:
           - name: id
             tests:
                 - unique
                 - not_null
+          - name: session_id 
+            description: "A session_id based on device_type and time between pageviews. If more than 30 min between views, a new session_id will be created."
+            tests:
+                - not_null
+
