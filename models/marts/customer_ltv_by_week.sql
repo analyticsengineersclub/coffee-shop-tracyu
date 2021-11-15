@@ -1,4 +1,4 @@
-{{ config(materialized='table') }}
+{{ config(materialized='view') }}
 
 -- for each order_items id, determine the week of the order
 -- and the week the customer was acquired
