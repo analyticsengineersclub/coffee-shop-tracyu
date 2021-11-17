@@ -1,5 +1,6 @@
 {{ config(materialized='view') }}
 
+-- weekly sales by product category
 with product_categories as (select id as product_id
 , category as product_category
 from {{ ref('stg__products') }}

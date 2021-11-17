@@ -1,6 +1,7 @@
 
 {{ config(materialized='table') }}
 
+--each customer, their first order, and total number of orders
 WITH orders AS (
     SELECT customer_id
     , MIN(created_at) first_order_at
