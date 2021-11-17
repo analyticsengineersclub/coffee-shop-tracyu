@@ -33,3 +33,10 @@ clean-targets:         # directories to be removed by `dbt clean`
 # using the `{{ config(...) }}` macro.
 models:
     materialized: view
+
+# github
+vars:
+  github_source:
+    github_database: analytics-engineers-club
+    github_schema: github
+    github__using_repo_team: false # by default this is assumed to be true
