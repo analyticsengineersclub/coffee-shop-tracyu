@@ -32,7 +32,7 @@ models:
     - name: customer_ltv_by_week
       description: "Weekly revenue and cumulative revenue by week since they were acquired as a customer"
       tests:
-        - unique:
+        - bigquery__test_unique:
             column_name: "(customer_id || '-' || week)"
       columns:
         - name: customer_id
@@ -44,7 +44,7 @@ models:
         - name: revenue
           tests:
             - not_null  
+            - is_positive
         - name: cumulative_revenue
           tests:
             - not_null                     
-
