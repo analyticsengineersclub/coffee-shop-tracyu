@@ -14,6 +14,11 @@ models:
             tests:
                 - unique
                 - not_null
+          - name: order_id
+            tests:
+              - relationships: 
+                  to: ref('stg__orders')
+                  field: id
 
     - name: stg__orders
       columns:
