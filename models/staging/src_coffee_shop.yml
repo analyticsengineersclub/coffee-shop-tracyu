@@ -53,3 +53,4 @@ sources:
     project: analytics-engineers-club
     tables:
       - name: form_events
+      - name: favorite_ice_cream_flavors
